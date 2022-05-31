@@ -44,7 +44,7 @@ document.addEventListener('alpine:init', () => {
 				try {
 					axios
 						.post('/api/garment', this.garmentList)
-						.then(()=>this.getGarments())
+						.then(()=>this.getGarments()+"Garment successfully added!")
 						.catch(error => console.log(error))
 				} catch (error) {
 
@@ -53,8 +53,10 @@ document.addEventListener('alpine:init', () => {
 				// .then(r => r.json())
 				// .then(garmentsData => this.garments = garmentsData.data)
 			},
-			Show() {
-
+			errorMessages() {
+				put('/api/garments:id')
+				.then(r => r.json())
+				.then(garmentsData => this.garments = garmentsData.data)
 			}
 		};
 	});

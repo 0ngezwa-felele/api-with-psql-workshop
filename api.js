@@ -9,15 +9,15 @@ module.exports = function (app, db) {
 	app.get('/api/garments', async function (req, res) {
 
 		const { gender, season } = req.query;
-		let garments = await db.many('select * from garment');
+		let garments = await db.manyOrNone('select * from garment');
 		if(season  && !gender) {
-			garments = await db.many(`select * from garment where season = $1`,[season]);
+			garments = await db.manyOrNone(`select * from garment where season = $1`,[season]);
 		}
 		if(gender && !season){
-			garments = await db.many(`select * from garment where gender = $1`,[gender])
+			garments = await db.manyOrNone(`select * from garment where gender = $1`,[gender])
 		}
 		if(season && gender){
-			garments = await db.many(`select * from garment where gender = $1 and season = $2`,[gender,season])
+			garments = await db.manyOrNone(`select * from garment where gender = $1 and season = $2`,[gender,season])
 		}
 		res.json({
 			data: garments

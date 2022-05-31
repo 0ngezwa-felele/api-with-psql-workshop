@@ -23,7 +23,7 @@
 			<h2>Filter</h2>
 			<div class="genders">
 				<label>
-					<input @change="filterGarments()" x-model="genderFilter" type="radio" name="gender" value="All"> All
+					<input @change="getGarments()" x-model="genderFilter" type="radio" name="gender" value="All"> All
 				</label>
 
 				<label>
@@ -43,7 +43,7 @@
 			<div class="seasons">
 
 				<label>
-					<input @change="filterGarments()" x-model="seasonFilter" type="radio" name="season" value="All"> All
+					<input @change="getGarments()" x-model="seasonFilter" type="radio" name="season" value="All"> All
 				</label>
 				<label>
 					<input @change="filterGarments()" x-model="seasonFilter" type="radio" name="season" value="Summer">
@@ -54,9 +54,10 @@
 					Winter
 				</label>
 				<label>
-					<input @change="filterGarments()" x-model="seasonFilter" type="radio" name="season"
+					<input @change="getGarments()" x-model="seasonFilter" type="radio" name="season"
 						value="All Seasons"> All seasons
 				</label>
+
 			</div>
 			<div>
 				Filter by price range:
@@ -76,7 +77,6 @@
 				<div x-data="{ show: false }">
 					<button @click="show=!show">Add Garment</button>
 					<div x-show="show">
-
 						<div class="add garment">
 							<h2>Add garment</h2>
 							<img src="/images/{{img}}" alt="">
@@ -100,7 +100,7 @@
 								<div class="field">
 									<label for="">Gender</label>
 									<div>
-										<input type="text" x-model="garmentList.gender" name="gender" class="gender">
+										<input type="text" x-model="garmentList.gender" name="gender" class="gender" value="unisex">
 									</div>
 								</div>
 								<div class="field">
@@ -110,9 +110,10 @@
 									</div>
 								</div>
 								<div class="mt1">
-									<input type="button" @click="addGarment()" name="action" value="Add"
+									<input type="button" @click="addGarment()"name="action" value="Add"
 										class="addGarmentBtn">
-									<input type="button" name="action" value="Hide" class="hideAddGarmetBtn">
+									<input type="button" @click="show=!show" name="action" value="Hide" class="hideAddGarmetBtn">
+									<input type="button" @click="show=!show" name="action" value="Delete" class="hideAddGarmetBtn">
 								</div>
 							</form>
 						</div>
