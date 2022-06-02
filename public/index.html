@@ -113,7 +113,6 @@
 									<input type="button" @click="addGarment()"name="action" value="Add"
 										class="addGarmentBtn">
 									<input type="button" @click="show=!show" name="action" value="Hide" class="hideAddGarmetBtn">
-									<input type="button" @click="show=!show" name="action" value="Delete" class="hideAddGarmetBtn">
 								</div>
 							</form>
 						</div>
@@ -130,10 +129,11 @@
 		<div class="garments">
 
 			<template x-for="garment in garments">
-				<div>
+				<div class="eachGarment" >
 					<div x-text="garment.description"></div>
 					<div x-text="garment.price"></div>
 					<img x-bind:src="`/images/${garment.img}`" alt="image">
+					<button @click="deleteGarment(garment)">Remove</button>
 				</div>
 
 			</template>

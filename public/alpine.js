@@ -1,5 +1,4 @@
 
-
 document.addEventListener('alpine:init', () => {
 	Alpine.data('missy', () => {
 
@@ -49,14 +48,11 @@ document.addEventListener('alpine:init', () => {
 				} catch (error) {
 
 				}
-
-				// .then(r => r.json())
-				// .then(garmentsData => this.garments = garmentsData.data)
 			},
-			errorMessages() {
-				put('/api/garments:id')
-				.then(r => r.json())
-				.then(garmentsData => this.garments = garmentsData.data)
+			deleteGarment(id){
+				axios
+				.delete(`/api/garments/${id.id}`)
+				.then(()=>this.getGarments())
 			}
 		};
 	});

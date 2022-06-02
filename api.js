@@ -75,7 +75,6 @@ module.exports = function (app, db) {
 		try {
 
 			const { description, price, img, season, gender } = req.body;
-			// insert a new garment in the database
 			 await db.none(`insert into garment( description, gender,price,img,season) values($1,$2,$3,$4,$5) on conflict do nothing`, [ description, gender,price,img,season]);
 		
 			res.json({
@@ -112,14 +111,16 @@ module.exports = function (app, db) {
 	});
 
 
-	app.delete('/api/garments', async function (req, res) {
+	app.delete('/api/garments/:id', async function (req, res) {
 
 		try {
-			const { gender } = req.query;
-			// delete the garments with the specified gender
+			const { id } = req.params;
+			const result = await db.one(`delete from garment where id = $1`,[id])
 
 			res.json({
-				status: 'success'
+				status: 'success',
+				data:result
+
 			})
 		} catch (err) {
 			// console.log(err);
@@ -131,4 +132,22 @@ module.exports = function (app, db) {
 	});
 
 
+	app.post('/api/garment/', async function (req, res) {
+
+		try {
+			 await db.none(`delete from garment`);
+		
+			res.json({
+				status: 'success',
+
+			});
+
+		} catch (err) {
+			console.log(err);
+			res.json({
+				status: 'error',
+				error: err.message
+			})
+		}
+	});
 }
